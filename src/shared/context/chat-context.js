@@ -13,18 +13,18 @@ const initialState = {
       },
       {
         userId: "5f74a46a49c33d22703f4ae0",
-        from: "Alex Jones",
-        msg: " Own the libs.",
+        from: "Chester Dew",
+        msg: "Greets",
       },
       {
         userId: "5f75e88efb44bda00e55f0e9",
-        from: "Coon Rat",
-        msg: "I din do nuffin",
+        from: "Lorrell Appleton",
+        msg: "Not a chance",
       },
     ],
 
     proudBoys: [
-      { userId: "5f75e86dfb44bda00e55f0e8", from: "tt123", msg: "cucks" },
+      { userId: "5f75e86dfb44bda00e55f0e8", from: "tt123", msg: "Yo" },
       {
         userId: "5f74a46a49c33d22703f4ae0",
         from: "anotherUser2",
@@ -32,8 +32,8 @@ const initialState = {
       },
       {
         userId: "5f75e88efb44bda00e55f0e9",
-        from: "thirdrike",
-        msg: "hail the leeders",
+        from: "Timothy McHerrington",
+        msg: "Good day sir",
       },
     ],
   },
@@ -65,7 +65,7 @@ const sendChatAction = (value) => {
 const ChatContext = (props) => {
   const [allChats, dispatch] = useReducer(reducer, initialState);
   if (!socket) {
-    socket = io("http://localhost:8000", {
+    socket = io("http://localhost:5001", {
       path: "/",
     });
   }
