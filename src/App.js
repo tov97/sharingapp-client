@@ -64,33 +64,31 @@ const App = () => {
   }
   //suspense for lazy loading
   return (
-    <ChatContext>
-      <AuthContext.Provider
-        value={{
-          isLoggedIn: !!token,
-          token: token,
-          userId: userId,
-          name: name,
-          login: login,
-          logout: logout,
-        }}
-      >
-        <Router>
-          <MainNavigation />
-          <main>
-            <Suspense
-              fallback={
-                <div className="center">
-                  <LoadingSpinner />
-                </div>
-              }
-            >
-              {routes}
-            </Suspense>
-          </main>
-        </Router>
-      </AuthContext.Provider>
-    </ChatContext>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: !!token,
+        token: token,
+        userId: userId,
+        name: name,
+        login: login,
+        logout: logout,
+      }}
+    >
+      <Router>
+        <MainNavigation />
+        <main>
+          <Suspense
+            fallback={
+              <div className="center">
+                <LoadingSpinner />
+              </div>
+            }
+          >
+            {routes}
+          </Suspense>
+        </main>
+      </Router>
+    </AuthContext.Provider>
   );
 };
 

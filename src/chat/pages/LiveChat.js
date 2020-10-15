@@ -2,83 +2,47 @@ import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import Button from "../../shared/components/FormElements/Button";
 import Avatar from "../../shared/components/UIElement/Avatar";
+import Messages from "../components/Messages";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
-import { CTX } from "../../shared/context/chat-context";
+import { useChat } from "../../shared/hooks/chat-hook";
+// import { CTX } from "../../shared/context/chat-context";
 const LiveChat = () => {
   const auth = useContext(AuthContext);
-  const { allChats, sendChatAction } = useContext(CTX);
-  const channels = Object.keys(allChats);
-  const [activeChannel, setActiveChannel] = useState();
-  const { isLoading, sendRequest } = useHttpClient();
-  const [loadedUsers, setLoadedUsers] = useState();
-  const [inputText, setInputText] = useState();
-  const [channel, setChannel] = useState("warRoom");
+  // const { allChats, sendChatAction } = useContext(CTX);
+  // const channels = Object.keys(allChats);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const responseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + "/users"
-        );
-        setLoadedUsers(responseData.users);
-      } catch (err) {}
-    };
-    fetchUsers();
-  }, [sendRequest]);
+  const { incomingData, sendChatAction, inputText, setInputText } = useChat();
 
-  const activeChannelHandler = (props) => {
-    setActiveChannel(props);
-  };
   const handleInput = (e) => {
     setInputText(e.target.value);
   };
-  console.log(allChats);
+
   // const userById = async (props) =>{
   //   const user = await props.find(user =>{
   //     return props.id === user.id
   //   })
   //   return user;
   // }
+
   return (
     <ChatWindow>
-      <ChannelSelectors>
-        {channels &&
-          channels.map((channel) => (
-            <Button onClick={(channel) => activeChannelHandler}>
-              {channel}
-            </Button>
-          ))}
-      </ChannelSelectors>
-
-      <TopAgentsModule />
-      <ChatHeader>{activeChannel}</ChatHeader>
+      <ChatHeader>Chat</ChatHeader>
       <ChatView>
-        {allChats &&
-          loadedUsers &&
-          allChats.channel[channel].map((chat) => (
-            <ChatHolder>
-              <ChatProfile>
-                <ChatProfilePicture
-                  src={`${process.env.REACT_APP_ASSET_URL}/${loadedUsers[0].image}`}
-                />
-                <ChatUser>{chat.from}</ChatUser>
-                <ChatText> {chat.msg} </ChatText>
-              </ChatProfile>
-            </ChatHolder>
-          ))}
+        {/* src={`${process.env.REACT_APP_ASSET_URL}/${loadedUsers[0].image}`} */}
+
+        <Messages incomingData={incomingData} />
       </ChatView>
       <ChatInput>
         <input value={inputText} onChange={(event) => handleInput(event)} />
         <ChatCharacters> 0 / 100 </ChatCharacters>
         <Button
           type="submit"
-          onClick={() =>
-            sendChatAction({
+          onClick={(event) =>
+            sendChatAction(event, {
               userId: auth.userId,
-              from: auth.name,
-              msg: inputText,
-              channel: channel,
+              username: auth.name,
+              message: inputText,
             })
           }
         >

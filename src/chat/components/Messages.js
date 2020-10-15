@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const Messages = ({ incomingData }) => {
+const Messages = ({ incomingData, activeChannel, loadedUsers }) => {
   return (
     <AllChats>
       {incomingData.map((data) => (
         <ChatMessage superchat={data.superchat}>
-          <Avatar src={data.avatar} alt="Thumbnail" />
+          <Avatar
+            //  src={`${process.env.REACT_APP_ASSET_URL}/${loadedUsers[0].image}`}
+            alt="Thumbnail"
+          />
           <UsernameContainer>
             <UsernameText superchat={data.superchat}>
               {data.username}
@@ -52,7 +55,8 @@ const UsernameContainer = styled.div`
   flex-direction: column;
 `;
 const UsernameText = styled.p`
-  font-family: "Norsebold";
+  font-family: "Courier New";
+  font-weight: bold;
   margin: 15px 8px 0px 55px;
   font-size: 15px;
   color: ${(props) => (props.superchat ? "#242424" : "white")};
@@ -61,8 +65,8 @@ const UsernameText = styled.p`
 
 const SuperChatAmount = styled.p`
   display: ${(props) => (props.superchat ? "flex" : "none")};
+  font-family: "Courier New";
   font-weight: bold;
-  font-family: TrajanProThree, serif;
   margin: 18px 0px 0px 5px;
   font-size: 24px;
   color: #242424;
