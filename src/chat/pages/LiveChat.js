@@ -64,54 +64,19 @@ const ChatWindow = styled.div`
   background: white;
   height: 600px;
 `;
-const ChannelSelectors = styled.div`
-  width: 100%;
-`;
-
-const TopAgentsModule = styled.div``;
-
 const ChatHeader = styled.header`
   align-items: center;
   justify-content: center;
 `;
-
 const ChatView = styled.div`
   height: 80%;
 `;
-
-const ChatHolder = styled.div``;
-
-const ChatProfile = styled.div`
-  display: flex;
-  width: 100%;
-  height: 4rem;
-  margin-right: 1rem;
-`;
-
-const ChatProfilePicture = styled.img`
-  display: block;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  margin-right: 15px;
-`;
-
-const ChatUser = styled.p`
-  margin-right: 10px;
-`;
-
-const ChatText = styled.p``;
-
 const ChatInput = styled.div`
   display: flex;
 `;
-
 const ChatCharacters = styled.p`
   margin-left: 15px;
   margin-right: 15px;
 `;
-
-const ChatSendIcon = styled.img``;
 
 export default LiveChat;
